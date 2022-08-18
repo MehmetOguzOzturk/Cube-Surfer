@@ -11,12 +11,14 @@ public class Playercontroller : MonoBehaviour
     public float speedX;
     public float height;
     bool isGameover;
-    
-    
-    
-    private void Start() {
-      
-    }
+
+    float step;
+    Vector2 actionPosition;
+
+    public bool isRun, isFight;
+    public float speed, swipeSpeed;
+
+
    
 
     // Update is called once per frame
@@ -26,13 +28,39 @@ public class Playercontroller : MonoBehaviour
             return;
 
         Move();
+
+        transform.position = new Vector3(transform.position.x, height , transform.position.z);
     }
 
     private void Move()
     {
-        float horizantal = Input.GetAxis("Horizontal") * speedX * Time.deltaTime;
-        transform.Translate(horizantal, 0, speedZ * Time.deltaTime);
-        transform.position = new Vector3(transform.position.x, height, transform.position.z);
+        if (Input.GetMouseButtonDown(0))
+        {
+            actionPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            isRun = true;
+           
+        }
+
+        if (isRun)
+            transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.World);
+
+        if (Input.GetMouseButton(0))
+        {
+
+            step = (Input.mousePosition.x - actionPosition.x);
+
+            transform.position += new Vector3(step * swipeSpeed, 0, 0) * Time.deltaTime;
+
+
+            actionPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            isRun = false;
+        }
     }
 
     public IEnumerator LowerHeight()
