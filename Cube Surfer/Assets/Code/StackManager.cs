@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class StackManager : MonoBehaviour
 {
-    public bool iscollected;
     public GameObject player;
     public Playercontroller playercontroller;
+    public ParticleSystem particle;
+    public bool iscollected;
     public float index;
     int number;
-    
+    bool onGround;
+    Rigidbody rb;
 
-    
-    private void Update() {
-
-        if (transform.parent!=null&&iscollected)
-        {
-            transform.localPosition=new Vector3(0,-index,0);
-        }
-        
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
     }
+
     
     public void Collect()
     {
@@ -36,13 +34,15 @@ public class StackManager : MonoBehaviour
         
         if (other.gameObject.CompareTag("Stack")&&transform.parent==player.transform)
         {
-            
+            player.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Jump");
             StartCoroutine(playercontroller.Score(number));
-            player.GetComponent<Playercontroller>().height++;           
+            player.GetComponent<Playercontroller>().height++;
+            player.GetComponent<Playercontroller>().SetHeight();           
             other.gameObject.GetComponent<StackManager>().iscollected=true;
             other.gameObject.GetComponent<StackManager>().Setindex( player.GetComponent<Playercontroller>().height);
             other.gameObject.transform.parent=player.transform;
             other.gameObject.tag="Collected";
+            other.transform.localPosition = new Vector3(0, -other.GetComponent<StackManager>().index, 0);
         }
         else if (other.gameObject.CompareTag("Obstacle"))
         {
@@ -55,19 +55,60 @@ public class StackManager : MonoBehaviour
             other.gameObject.GetComponent<BoxCollider>().enabled=false;
             
         }
+
+        if (other.CompareTag("Ground"))
+        {
+            onGround = true;
+            Vector3 newVelocity = rb.velocity;
+            newVelocity.y = 0;
+            rb.velocity = newVelocity;
+            
+
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Ground"))
+        {
+            onGround = false;
+
+        }
     }
 
     private void OnTriggerStay(Collider other) {
         if (other.gameObject.CompareTag("Water"))
         {
-            StartCoroutine(DecreaseStack());
+            if (player.GetComponent<Playercontroller>().height > 0)
+            {
+                player.GetComponent<Playercontroller>().height--;
+            }
+            particle.transform.parent = null;
+            particle.Play();
+            Destroy(gameObject);
+        }
+
+        if (other.CompareTag("Ground"))
+        {
+            onGround = true;
+            Vector3 newVelocity = rb.velocity;
+            newVelocity.y = 0;
+            rb.velocity = newVelocity;
+
+
         }
     }
 
     IEnumerator DecreaseStack()
     {
-        yield return new WaitForSeconds(8*Time.deltaTime);
-        player.GetComponent<Playercontroller>().height--;
+        yield return new WaitForSeconds(0.1f);
+
+        if (player.GetComponent<Playercontroller>().height > 0)
+        {
+            player.GetComponent<Playercontroller>().height--;
+        }
+
+       // player.GetComponent<Playercontroller>().SetHeight();
         Destroy(gameObject);
     }
 

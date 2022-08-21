@@ -8,6 +8,7 @@ TagManager:
   - Collected
   - Obstacle
   - Water
+  - Ground
   layers:
   - Default
   - TransparentFX
