@@ -467,7 +467,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 217011442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.98, y: 0, z: 59.2}
+  m_LocalPosition: {x: -0.98, y: 0, z: -1.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -500,7 +500,7 @@ MonoBehaviour:
   isRun: 0
   isFight: 0
   speed: 5
-  swipeSpeed: 5
+  swipeSpeed: 1
 --- !u!1 &219616585
 GameObject:
   m_ObjectHideFlags: 0
@@ -2357,14 +2357,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.23555398, y: -0.19806147, z: 0.049099386, w: 0.9501975}
-  m_LocalPosition: {x: 6.74832, y: 9.777073, z: -7.6093197}
+  m_LocalRotation: {x: 0.2399085, y: -0.07446507, z: 0.018459965, w: 0.9677594}
+  m_LocalPosition: {x: 0.2681148, y: 8.000004, z: -11.300014}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 27.846, y: -8.8, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2378,7 +2378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hedef: {fileID: 217011442}
-  mesafe: {x: 4, y: 8, z: -6}
+  mesafe: {x: 2, y: 8, z: -11}
 --- !u!4 &971529634 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 425322, guid: fa0f45d143def4e4188900695d955614, type: 3}
