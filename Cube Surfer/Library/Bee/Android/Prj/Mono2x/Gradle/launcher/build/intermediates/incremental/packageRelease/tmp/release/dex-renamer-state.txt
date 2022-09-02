@@ -1,4 +1,4 @@
-#Sun Aug 21 13:22:50 EET 2022
+#Sun Aug 21 13:53:17 EET 2022
 base.0=C\:\\Users\\mhmto\\Documents\\GitHub\\Cube-Surfer\\Cube Surfer\\Library\\Bee\\Android\\Prj\\Mono2x\\Gradle\\launcher\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

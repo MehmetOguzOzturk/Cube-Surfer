@@ -63,8 +63,6 @@ public class Playercontroller : MonoBehaviour
             pos.x = Mathf.Clamp(transform.position.x, -3.4f, 3.4f);
             transform.position = pos;
         }
-
-       
     }
 
     public IEnumerator LowerHeight()
